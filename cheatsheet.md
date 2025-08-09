@@ -33,10 +33,11 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
   - Zatwierdza zmiany z poczekalni.
   - `-m "Opis commita"`: Dodaje opis bezpośrednio w komendzie.
   - `-am "Opis"`: Dodaje wszystkie śledzone pliki i od razu tworzy commit.
-  - `--amend`: Modyfikuje ostatni commit (zmienia jego zawartość lub opis).
+  - `--amend`: Modyfikuje ostatni commit (zmienia jego zawartość lub opis). Tworzy nowy commit na bazie starego, możemy dołączyć nowe zmiany.
 - `git restore`
   - Odrzuca zmiany w katalogu roboczym
   - `--staged`: Wycofuje zmiany z poczekalni do katalogu roboczego
+  - `--source=<hash_commita/nazwa_gałęzi> <nazwa_pliku>`: Przywracanie pliku z konkretnego commita lub gałęzi
 
 ---
 
@@ -53,11 +54,16 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
   - Przełącza na inną gałąź.
   - `-b <nazwa_nowej_gałęzi>`: Tworzy nową gałąź i od razu się na nią przełącza.
   - `<plik>`: Odrzuca zmiany w danym pliku w katalogu roboczym.
+- `git switch`
+  - `<nazwa_gałęzi>`: Przejście na istniejącą gałąź.
+  - `-c <nazwa_gałęzi>`: Utworzenie i przejście na nową gałąź.
+  - `-`: Powrót do poprzedniej gałęzi.
 - `git merge <nazwa_gałęzi>`
   - Scala podaną gałąź z bieżącą.
   - `--no-ff`: Zawsze twórz merge commit, nawet jeśli możliwe jest przewinięcie (fast-forward). Zachowuje kontekst istnienia gałęzi.
-  - `--squash`: Scala wszystkie commity z gałęzi w jeden, gotowy do zatwierdzenia. Nie tworzy merge commita.
+  - `--squash`: Scala wszystkie commity z gałęzi w jeden, gotowy do zatwierdzenia. Nie tworzy merge commita. Usunąć branch po squash merge!
   - `--abort`: Przerywa proces scalania, jeśli wystąpiły konflikty.
+- test
 
 ---
 
@@ -65,6 +71,7 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
 
 - `git log`
   - Wyświetla historię commitów.
+  - `<gałąź>`: Pokazuje commity z danej gałęzi.
   - `--oneline`: Pokazuje każdy commit w jednej linii.
   - `--graph`: Rysuje graf historii gałęzi.
   - `--decorate`: Pokazuje, gdzie wskazują gałęzie i tagi.
@@ -83,8 +90,9 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
 
 ### Cofanie i Poprawianie Błędów
 
+- `git checkout <hash_commita>`: Możliwość przełączenia na commit/HEAD bez gałęzi (detached HEAD). Przywraca projekt do stanu podanego commita. Aby wrócić do aktualnego stanu użyj `git checkout <nazwa_gałęzi>`
 - `git reset`
-  - `HEAD^` lub `HEAD~1`: Cofa ostatni commit, ale zachowuje zmiany (domyślnie `--mixed`).
+  - `HEAD^` lub `HEAD~1`: Cofa ostatni commit, ale zachowuje zmiany w katalogu roboczym (domyślnie `--mixed`).
   - `--soft <hash>`: Cofa commity, ale zostawia wszystkie zmiany w poczekalni.
   - `--hard <hash>`: **NIEODWRACALNIE** cofa commity i usuwa wszystkie zmiany.
 - `git revert <hash>`
@@ -118,16 +126,25 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
 
 ### Zaawansowane Narzędzia
 
-- `git rebase -i <baza>`
-  - Otwiera interaktywną sesję do edycji, łączenia, usuwania i zmiany kolejności commitów.
+- `git rebase -i <baza>` - przykład `git rebase -i HEAD~4`
+  - Otwiera interaktywną sesję do edycji, łączenia, usuwania i zmiany kolejności commitów. Po zakończeniu `rebase` należy użyć `git push --force-with-lease`, aby zaktualizować historię na zdalnym repozytorium.
 - `git cherry-pick <hash>`
   - Aplikuje jeden konkretny commit z innej gałęzi na bieżącą.
 - `git stash`
-  - Chowa bieżące, niezatwierdzone zmiany.
+  - Chowa bieżące, niezatwierdzone zmiany. Indeks 0 wskazuje najświeższe zmiany w schowku. **Pozwala przenosić niezatwierdzone zmiany pomiędzy gałęziami.**
+  - `-u`: Pozwala zapisać w schowku nieśledzone pliki.
+  - `-a`: Pozwala zapisać w schowku wszystkie pliki (również te ignorowane przez gita).
+  - `save "Opis schowka"`: Zapisuje zmiany w schowku z własnym opisem.
   - `list`: Pokazuje listę schowków.
+  - `branch <nazwa_gałęzi> <nazwa_schowka>`: Utworzy nową gałąź, zastosuje na niej zmiany z wybranego schowka oraz usunie ten schowek.
+  - `show <nazwa_schowka> -p`: Pokazuje zmiany, które znajdują się w schowku.
   - `pop`: Przywraca ostatni schowek i usuwa go z listy.
-  - `apply`: Przywraca schowek, ale go nie usuwa.
-  - `drop`: Usuwa schowek.
+    - `<nazwa_schowka>`: Przywraca konkretny schowek i usuwa
+  - `apply`: Przywraca ostatni schowek, ale go nie usuwa.
+    - `<nazwa_schowka>`: Przywraca konkretny schowek bez usuwania
+  - `drop`: Usuwa ostatni schowek.
+    - `<nazwa_schowka>`: Usuwa konkretny schowek
+  - `clear`: Czyści wszystkie schowki
 - `git bisect`
   - `start`: Rozpoczyna proces szukania błędu.
   - `good <hash>`: Oznacza commit jako "dobry" (bez błędu).
