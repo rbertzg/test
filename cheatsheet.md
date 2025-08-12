@@ -89,11 +89,13 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
 
 ### Cofanie i Poprawianie Błędów
 
+## **UWAGA** Zmiana opisów commitów (`git commit --amend`) lub zmiana historii (`rebase`) najleiej gdyby odbywała się tylko na lokalnym repozytorium.
+
 - `git checkout <hash_commita>`: Możliwość przełączenia na commit/HEAD bez gałęzi (detached HEAD). Przywraca projekt do stanu podanego commita. Aby wrócić do aktualnego stanu użyj `git checkout <nazwa_gałęzi>`
 - `git reset`
   - `HEAD^` lub `HEAD~1`: Cofa ostatni commit, ale zachowuje zmiany w katalogu roboczym (domyślnie `--mixed`).
-  - `--soft <hash>`: Cofa commity, ale zostawia wszystkie zmiany w poczekalni.
-  - `--hard <hash>`: **NIEODWRACALNIE** cofa commity i usuwa wszystkie zmiany.
+  - `--soft <hash/nazwa_gałęzi>`: Cofa commity, ale zostawia wszystkie zmiany w poczekalni.
+  - `--hard <hash/nazwa_gałęzi>`: **NIEODWRACALNIE** cofa commity i usuwa wszystkie zmiany. Przykład: `git reset --hard origin/main`
 - `git revert <hash>`
   - Tworzy nowy commit, który jest odwrotnością podanego commita. Bezpieczne dla publicznej historii.
 - `git clean`
