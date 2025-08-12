@@ -63,7 +63,6 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
   - `--no-ff`: Zawsze twórz merge commit, nawet jeśli możliwe jest przewinięcie (fast-forward). Zachowuje kontekst istnienia gałęzi.
   - `--squash`: Scala wszystkie commity z gałęzi w jeden, gotowy do zatwierdzenia. Nie tworzy merge commita. Usunąć branch po squash merge!
   - `--abort`: Przerywa proces scalania, jeśli wystąpiły konflikty.
-- test
 
 ---
 
