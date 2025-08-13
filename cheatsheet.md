@@ -71,14 +71,24 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
 - `git shortlog`: Wyświetla podsumowanie historii commitów, grupując je według autora.
 - `git log`
   - Wyświetla historię commitów.
+  - `-3`: Pokazuje 3 ostatnie commity.
+  - `--author=<username>`: Pokazuje commity danego autora.
+  - `--before "rok-miesiąc-dzień"`: Pokazuje commity przed podaną datą.
+  - `--after "rok-miesiąc-dzień"`: Pokazuje commity po podanej dacie.
+  - `--before "rok-miesiąc-dzień" --after "rok-miesiąc-dzień"`: Pokazuje commity pomiędzy wybranymi datami.
+  - `--stat --oneline`: Pokazuje informacje o zmianach (wyświetla ilości dodanych, usuniętych, zmienionych linii).
+  - `--format=fuller`: Pokazuje commity z datą pierwotną i datą włączenia do gałęzi (AuthorDate i CommitDate).
+  - `--pretty="<format>"`: Pokazuje logi we własnym zdefiniowanym formacie, np. `git log --pretty="%h | %an | %ar - %s"`
   - `<gałąź>`: Pokazuje commity z danej gałęzi.
   - `--oneline`: Pokazuje każdy commit w jednej linii.
   - `--graph`: Rysuje graf historii gałęzi.
   - `--decorate`: Pokazuje, gdzie wskazują gałęzie i tagi.
   - `--all`: Pokazuje historię wszystkich gałęzi.
-  - `-p <plik>`: Pokazuje historię zmian tylko dla danego pliku.
+  - `-p <ściezka_do_pliku>`: Pokazuje historię zmian tylko dla danego pliku.
+  - `<ściezka_do_pliku>`: Pokazuje historię zmian tylko dla danego pliku.
+  - `-3 -p`: Pokazuje historię zmian dla 3 ostatnich commitów.
   - `-S"tekst"`: Wyszukuje commity, które wprowadziły lub usunęły wystąpienia danego tekstu.
-  - `--grep="wzorzec"`: Filtruje commity po wzorcu w ich opisie.
+  - `--grep="tekst"`: Filtruje commity po tekście w ich opisie.
 - `git diff`
   - Pokazuje różnice między katalogiem roboczym a poczekalnią.
   - `--staged` lub `--cached`: Pokazuje różnice między poczekalnią a ostatnim commitem.
