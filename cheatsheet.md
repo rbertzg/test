@@ -322,3 +322,5 @@ BREAKING CHANGE: 'username' zmieniono na 'login' w /api/v1/users.
 ```
 
 ---
+
+### Semantic Versioning (SemVer)
