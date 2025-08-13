@@ -68,6 +68,7 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
 
 ### Analiza Historii i Zmian
 
+- `git shortlog`: Wyświetla podsumowanie historii commitów, grupując je według autora.
 - `git log`
   - Wyświetla historię commitów.
   - `<gałąź>`: Pokazuje commity z danej gałęzi.
@@ -165,3 +166,159 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
 - `git lfs`
   - `install`: Inicjalizuje Git LFS.
   - `track "*.psd"`: Rozpoczyna śledzenie plików o danym rozszerzeniu przez LFS.
+
+---
+
+### Conventional Commits
+
+Właściwe nazywanie commitów w Git jest kluczowe dla utrzymania czytelnej historii projektu. Standard Conventional Commits wprowadza ustrukturyzowany format opisów commitów, zrozumiały zarówno dla ludzi, jak i maszyn.
+
+---
+
+#### Złote zasady pisania dobrych commitów
+
+- Tytuł i opis: Krótki, zwięzły tytuł + opcjonalny opis szczegółowy.
+- Tryb rozkazujący: Pisanie w formie np. „Dodaj” zamiast „Dodano”.
+- Limit znaków: 50–72 znaki w tytule.
+- Wielka litera, brak kropki: Tytuł zaczynaj wielką literą, nie kończ kropką.
+- Jedna zmiana na commit: Jeden commit = jedna logiczna zmiana.
+
+---
+
+#### Struktura commitów
+
+```
+<typ>[(opcjonalny zakres)]: <opis>
+
+[opcjonalny, dłuższy opis]
+
+[opcjonalna stopka]
+```
+
+---
+
+#### Typy commitów
+
+- `feat`: nowa funkcjonalność (MINOR w semantycznym wersjonowaniu)
+- `fix`: naprawa błędu (PATCH)
+- `docs`: zmiany w dokumentacji
+- `style`: zmiany formatowania, które nie wpływają na kod
+- `refactor`: zmiany w kodzie, bez naprawy błędu i nowych funkcji
+- `perf`: poprawa wydajności
+- `test`: dodawanie/poprawianie testów
+- `build`: zmiany w procesie budowania lub zależnościach
+- `ci`: zmiany w konfiguracji CI/CD
+- `chore`: inne zmiany niekodowe (np. aktualizacja narzędzi)
+- `revert`: wycofanie poprzedniego commita
+
+---
+
+#### Zakres (Scope)
+
+Opcjonalny zakres pozwala określić część projektu, której dotyczy zmiana.
+Przykłady:
+
+- `feat(auth): dodaj logowanie przez Google`
+- `fix(ui): popraw wyświetlanie przycisku`
+
+---
+
+#### Opis (Description)
+
+Krótki opis zmian w commitcie, np.:
+
+- `feat: dodaj możliwość resetowania hasła`
+
+---
+
+#### Dłuższy opis (Body)
+
+Opcjonalny, bardziej szczegółowy opis zmian, motywacji i kontekstu:---
+
+#### Typy commitów
+
+- `feat`: nowa funkcjonalność (MINOR w semantycznym wersjonowaniu)
+- `fix`: naprawa błędu (PATCH)
+- `docs`: zmiany w dokumentacji
+- `style`: zmiany formatowania, które nie wpływają na kod
+- `refactor`: zmiany w kodzie, bez naprawy błędu i nowych funkcji
+- `perf`: poprawa wydajności
+- `test`: dodawanie/poprawianie testów
+- `build`: zmiany w procesie budowania lub zależnościach
+- `ci`: zmiany w konfiguracji CI/CD
+- `chore`: inne zmiany niekodowe (np. aktualizacja narzędzi)
+- `revert`: wycofanie poprzedniego commita
+
+---
+
+#### Zakres (Scope)
+
+Opcjonalny zakres pozwala określić część projektu, której dotyczy zmiana.
+Przykłady:
+
+- `feat(auth): dodaj logowanie przez Google`
+- `fix(ui): popraw wyświetlanie przycisku`
+
+---
+
+#### Opis (Description)
+
+Krótki opis zmian w commitcie, np.:
+
+- `feat: dodaj możliwość resetowania hasła`
+
+---
+
+#### Dłuższy opis (Body)
+
+Opcjonalny, bardziej szczegółowy opis zmian, motywacji i kontekstu:
+
+- `Dodano funkcjonalność wysyłania maila z linkiem resetującym hasło.
+Ułatwia użytkownikom odzyskiwanie konta.`
+
+---
+
+#### Stopka (Footer)
+
+Opcjonalna stopka może zawierać:
+
+- odwołania do zadań w trackerze: `Fixes #123`
+- informację o zmianach łamiących kompatybilność: `BREAKING CHANGE: zmieniono API logowania`
+
+---
+
+#### Przykłady
+
+```
+feat(uzytkownicy): Dodaj możliwość logowania przez media społecznościowe
+
+Użytkownicy mogą teraz logować się za pomocą kont Google i Facebook.
+```
+
+---
+
+```
+fix(koszyk): Popraw obliczanie sumy zamówienia
+
+Naprawiono błąd z naliczaniem zniżek przy określonej promocji.
+
+Fixes: #432
+```
+
+---
+
+```
+docs(api): Zaktualizuj dokumentację endpointu /products
+
+Dodano brakujące opisy parametrów sortowania i filtrowania.
+```
+
+---
+
+```
+feat(api)!: Zmień format odpowiedzi dla endpointu /users
+
+BREAKING CHANGE: 'username' zmieniono na 'login' w /api/v1/users.
+```
+
+---
