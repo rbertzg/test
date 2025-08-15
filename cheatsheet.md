@@ -1,3 +1,5 @@
+![](https://media.discordapp.net/attachments/1202210478076461087/1403517823342481629/image.png?ex=689f1795&is=689dc615&hm=b0ebe464c3f6e7797b7f431a36cf4eafd6332bd3bd5a4191514889854d9ce693&=&format=webp&quality=lossless&width=902&height=733)
+
 # Git Cheatsheet - Skondensowana Ściągawka
 
 To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gita. Idealna do trzymania pod ręką podczas codziennej pracy.
@@ -115,6 +117,7 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
   - `-dfx`: Usuwa wszystkie nieśledzone pliki, katalogi oraz pliki ignorowane. Używaj z rozwagą!
 - `git reflog`
   - Wyświetla dziennik wszystkich operacji na `HEAD`. Twoja ostateczna siatka bezpieczeństwa do odzyskiwania "utraconych" commitów.
+  - `-5`: Wyświetla 5 ostatnich operacji.
 
 ---
 
@@ -138,7 +141,16 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
 
 ### Zaawansowane Narzędzia
 
-- `git rebase -i <baza>` - przykład `git rebase -i HEAD~4`
+Jak radzić sobie z konfliktami przy `rebase`:
+
+1. Rozwiąż konflikty w plikach.
+2. Dodaj naprawione pliki: `git add`.
+3. Kontynuuj proces: `git rebase --continue`.
+4. Aby się poddać i wrócić do stanu początkowego: `git rebase --abort`.
+
+---
+
+- `git rebase -i <baza>` - przykład `git rebase -i HEAD~4` lub `git rebase origin/main`
   - Otwiera interaktywną sesję do edycji, łączenia, usuwania i zmiany kolejności commitów. Po zakończeniu `rebase` należy użyć `git push --force-with-lease`, aby zaktualizować historię na zdalnym repozytorium.
 - `git cherry-pick <hash>`
   - Aplikuje jeden konkretny commit z innej gałęzi na bieżącą.
