@@ -1,1 +1,144 @@
-abcbb3
+trzeba gdzieś dopisać
+git merge --abort: Jeśli w trakcie rozwiązywania konfliktów uznasz, że proces jest zbyt skomplikowany i chcesz wrócić do stanu sprzed scalania, możesz użyć tego polecenia.[4][9]
+git log --merge: Pokazuje listę commitów, które są w konflikcie między scalanymi gałęziami.[2][9]
+git checkout --ours <nazwa_pliku>: Pozwala szybko wybrać wersję pliku z Twojej bieżącej gałęzi (HEAD).[10][11]
+git checkout --theirs <nazwa_pliku>: Pozwala szybko wybrać wersję pliku z gałęzi, którą scalasz.
+
+
+nie robić rebase na branchu z którego ktos moze korzystac
+
+
+Pogrupuj wedlug najczesciej uzywanych polecen i podziel to na odpowiednie kategorie i podkategorie, dodaj po kilka przykładow dla kazdego polecenia. Posortuj wedlug najczesciej uzywnanych. Doprecyzuj i uprość notatki, dodaj brakujące notatki lub wazne informacje ktorych moze brakować. Dodaj dodatkowe polecenia, jesli uwazasz ze czegos brakuje. Nie używaj ```<kod>``` to pokazywanaia przykładow. Notatki muszą być stworzone w pliku markdown (.md) z uwzglednienem profesjonalnych zasad tworzenia takiego pliku. Muszą być przejrzyste! Notatki twórz w prostym zrozumiałym języku, dodaj ostrzeżenia przy poleceniach które mogą być niebezpieczne. To mają być najbardziej pożądane notatki, które każdy chciałby posiadać. Podziel notatki na notaki z poleceniami, cheatsheet oraz scenariusze działania z gitem lub zastosuj własny podział jeśli znasz lepszy. Całość notatek zapisz pomiędzy znakami ```<notatki>```
+
+
+Tylko moje podejście jest takie:
+dokumentacja przed projektem (contributing.md, code-of-conduct, development workflow, czyli jakie podejscie m.in. do pracy z gitem, testow itd.)
+przygotowanie startera, eslint, prettier, cała konfiguracja, semantic-release, conventional-commits (trzymanie się formatu), ale nie nadmiarowe instalowanie nieuzywanych paczek w danym momencie.
+zachowanie liniowej historii commitów
+wiele dokumentacji projektowych (design/ui/ux) + dokumentacja API + fajnie byłoby zrobić dokumentacja diagramową bazy danych
+
+mniej więcej wypisałem kilka kroków ktore na pewno chce podjąć.
+
+Argument: chcę stworzyć 1 prosty projekt, ale z dokumentacją, żeby jak ktoś spojrzy nawet na taki prosty projekt to zobaczy, że dba się o wszystko a nie tylko o kod.
+
+Wydluzy to czas pisania tego projektu w kurwe czasu, ale tez pozowli sie nauczyc wiele dodatkowych rzeczy przy tworzeniu dokumentacji, mockupów, ui/ux, sporo artykulow chce przeczytac. Po za tym mi sie nie spieszy, innej pracy chce szukac po nowym roku.
+
+Myslalem tez o stworzeniu dev containera w dockerze do pracy nad projektem, ale nie wiem czy warto. Musielibysmy obgadac tez z jakich narzedzi bysmy korzystali, ja np. zainstalowałem sobie Volte do "trzymania wersji node'a + pnpm'a w projekcie"
+
+Daj znac co myslisz, tylko przeczytaj to najpierw, bo troche czasu poswiecilem na zerabnie myśli xD
+
+# 📜 Commit Verbs Guide – Web Development
+
+Zalecenia:
+- Tryb rozkazujący (imperative mood): *add*, *remove*, *fix* (nie *added*, *removed*, *fixed*).
+- Bez kropki na końcu tytułu.
+- Krótko i konkretnie (max ~50 znaków).
+- Angielski jako standard.
+
+---
+
+## 1. Dodawanie / Tworzenie
+
+| Czasownik   | Synonimy           | Kontekst użycia                                       | Przykład commita |
+|-------------|--------------------|-------------------------------------------------------|------------------|
+| add         | insert, append     | Dodanie nowej funkcji, elementu, stylu                | `add search bar to header` |
+| create      | build, generate    | Utworzenie od podstaw (np. plik, komponent, moduł)    | `create base layout` |
+| implement   | apply, integrate   | Wprowadzenie logiki/funkcjonalności                   | `implement JWT authentication` |
+| introduce   | roll out, launch   | Wprowadzenie nowej funkcji/procesu                    | `introduce API error handling` |
+| enable      | activate, turn on  | Włączenie funkcji lub opcji                           | `enable dark mode` |
+
+---
+
+## 2. Usuwanie
+
+| Czasownik   | Synonimy           | Kontekst użycia                                       | Przykład commita |
+|-------------|--------------------|-------------------------------------------------------|------------------|
+| remove      | strip, clear       | Usunięcie fragmentów kodu, elementów UI, zależności   | `remove unused CSS classes` |
+| delete      | erase, destroy     | Fizyczne usunięcie pliku lub zasobu                   | `delete old logo.svg` |
+| drop        | discontinue, stop  | Porzucenie wsparcia lub funkcji                       | `drop IE11 support` |
+| eliminate   | get rid of         | Wyeliminowanie problemu, duplikacji                   | `eliminate duplicate API calls` |
+
+---
+
+## 3. Modyfikacja / Zmiana
+
+| Czasownik   | Synonimy           | Kontekst użycia                                       | Przykład commita |
+|-------------|--------------------|-------------------------------------------------------|------------------|
+| update      | refresh, bump      | Zaktualizowanie wersji, treści, zasobu                | `update dependencies` |
+| change      | alter, switch      | Zmiana istniejącego elementu                          | `change default font size` |
+| modify      | tweak, adjust      | Modyfikacja fragmentu kodu, UI                        | `modify footer layout for mobile` |
+| replace     | swap, substitute   | Zastąpienie jednego elementu innym                    | `replace axios with fetch` |
+| adjust      | tune, align        | Drobne dostosowanie                                   | `adjust spacing between form fields` |
+| revise      | edit, rework       | Poprawienie lub przepisanie treści/kodu               | `revise wording in error messages` |
+
+---
+
+## 4. Ulepszanie / Optymalizacja
+
+| Czasownik   | Synonimy           | Kontekst użycia                                       | Przykład commita |
+|-------------|--------------------|-------------------------------------------------------|------------------|
+| improve     | better, upgrade    | Ulepszenie istniejącego rozwiązania                   | `improve page load speed` |
+| enhance     | boost, refine      | Dodanie nowych możliwości lub jakości                 | `enhance dropdown accessibility` |
+| optimize    | tune, streamline   | Optymalizacja wydajności                              | `optimize image loading` |
+| simplify    | streamline, reduce | Uproszczenie logiki lub struktury                     | `simplify form validation` |
+| refactor    | restructure, rework| Zmiana struktury kodu bez zmiany działania            | `refactor navbar component` |
+| clean       | tidy, clear        | Usunięcie zbędnych elementów, poprawki czytelności     | `clean unused imports` |
+| polish      | refine, beautify   | Drobne poprawki estetyki UI                           | `polish button hover animations` |
+
+---
+
+## 5. Naprawa błędów
+
+| Czasownik   | Synonimy           | Kontekst użycia                                       | Przykład commita |
+|-------------|--------------------|-------------------------------------------------------|------------------|
+| fix         | repair, mend       | Naprawa błędu                                         | `fix 404 error on blog page` |
+| resolve     | settle, handle     | Rozwiązanie problemu                                  | `resolve broken image links` |
+| patch       | hotfix, plug       | Szybka poprawka problemu                              | `patch memory leak in server` |
+| correct     | amend, rectify     | Korekta literówki lub drobnego błędu                  | `correct typo in README` |
+
+---
+
+## 6. Styl / Formatowanie
+
+| Czasownik   | Synonimy           | Kontekst użycia                                       | Przykład commita |
+|-------------|--------------------|-------------------------------------------------------|------------------|
+| style       | skin, theme        | Zmiana wyglądu UI lub formatowanie kodu               | `style hero section` |
+| format      | prettify, arrange  | Formatowanie kodu                                     | `format code with Prettier` |
+| reformat    | rearrange, restructure | Ponowne formatowanie                               | `reformat SCSS variables` |
+| align       | center, position   | Wyrównanie elementów w UI                             | `align footer buttons` |
+| restyle     | redesign, revamp   | Zmiana wyglądu elementu                               | `restyle modal window` |
+
+---
+
+## 7. Dokumentacja / Komunikacja
+
+| Czasownik   | Synonimy           | Kontekst użycia                                       | Przykład commita |
+|-------------|--------------------|-------------------------------------------------------|------------------|
+| document    | describe, outline  | Dodanie lub aktualizacja dokumentacji                 | `document API endpoints` |
+| clarify     | explain, detail    | Doprecyzowanie instrukcji lub opisu                   | `clarify usage instructions` |
+
+---
+
+
+Najczesciej uzywane
+---
+
+| Czasownik   | Kontekst użycia                              | Przykład commita |
+|-------------|----------------------------------------------|------------------|
+| add         | Dodanie nowej funkcji, elementu, pliku       | `add search bar to header` |
+| create      | Utworzenie czegoś od zera                    | `create base layout` |
+| update      | Aktualizacja istniejącego elementu, danych   | `update dependencies` |
+| change      | Zmiana wartości, ustawienia, treści          | `change default font size` |
+| modify      | Drobna modyfikacja fragmentu kodu lub UI     | `modify footer layout for mobile` |
+| improve     | Poprawa jakości lub działania                | `improve page load speed` |
+| enhance     | Ulepszenie poprzez dodanie możliwości        | `enhance dropdown accessibility` |
+| optimize    | Optymalizacja wydajności                     | `optimize image loading` |
+| simplify    | Uproszczenie logiki lub struktury            | `simplify form validation` |
+| refactor    | Przebudowa kodu bez zmiany działania         | `refactor navbar component` |
+| remove      | Usunięcie fragmentu kodu, zależności, elementu| `remove unused CSS classes` |
+| delete      | Fizyczne usunięcie pliku lub zasobu          | `delete old logo.svg` |
+| fix         | Naprawa błędu                                | `fix 404 error on blog page` |
+| resolve     | Rozwiązanie problemu                         | `resolve broken image links` |
+| style       | Zmiany w wyglądzie UI lub formatowanie kodu  | `style hero section for mobile` |
+
+---

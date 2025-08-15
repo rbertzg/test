@@ -4,6 +4,29 @@
 
 To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gita. Idealna do trzymania pod ręką podczas codziennej pracy.
 
+1.  Pobierz aktualny main
+
+- `git checkout main`
+- `git pull --rebase`
+
+2.  Nowy branch
+
+- `git switch -c feature/<nazwa>`
+
+3.  Pracuj
+
+- `git add -A`
+- `git commit -m "Opis"`
+
+4.  Zaktualizuj branch
+
+- `git fetch origin`
+- `git rebase origin/main`
+
+5.  Push + PR
+
+- `git push -u origin feature/<nazwa>`
+
 ---
 
 ### Konfiguracja i Inicjalizacja
@@ -150,7 +173,7 @@ Jak radzić sobie z konfliktami przy `rebase`:
 
 ---
 
-- `git rebase -i <baza>` - przykład `git rebase -i HEAD~4` lub `git rebase origin/main`
+- `git rebase -i <baza>` - przykład `git rebase -i HEAD~4` lub `git rebase origin/main` lub `git rebase -i <hash_commita>`
   - Otwiera interaktywną sesję do edycji, łączenia, usuwania i zmiany kolejności commitów. Po zakończeniu `rebase` należy użyć `git push --force-with-lease`, aby zaktualizować historię na zdalnym repozytorium.
 - `git cherry-pick <hash>`
   - Aplikuje jeden konkretny commit z innej gałęzi na bieżącą.
