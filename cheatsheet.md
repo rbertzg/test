@@ -94,6 +94,7 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
 ### Analiza Historii i Zmian
 
 - `git shortlog`: Wyświetla podsumowanie historii commitów, grupując je według autora.
+- `git --no-pager log`: Wyświetla historię commitów, ale nie znikają one z historii terminala.
 - `git log`
   - Wyświetla historię commitów.
   - `-3`: Pokazuje 3 ostatnie commity.
@@ -175,6 +176,7 @@ Jak radzić sobie z konfliktami przy `rebase`:
 
 - `git rebase -i <baza>` - przykład `git rebase -i HEAD~4` lub `git rebase origin/main` lub `git rebase -i <hash_commita>`
   - Otwiera interaktywną sesję do edycji, łączenia, usuwania i zmiany kolejności commitów. Po zakończeniu `rebase` należy użyć `git push --force-with-lease`, aby zaktualizować historię na zdalnym repozytorium.
+  - `<hash_commita>`: Uruchamia interaktywny rebase, w którym wyświetlone zostaną wszystkie commity znajdujące się po wskazanym commitcie w bieżącej gałęzi.
 - `git cherry-pick <hash>`
   - Aplikuje jeden konkretny commit z innej gałęzi na bieżącą.
 - `git stash`
