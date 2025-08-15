@@ -172,6 +172,8 @@ Jak radzić sobie z konfliktami przy `rebase`:
 3. Kontynuuj proces: `git rebase --continue`.
 4. Aby się poddać i wrócić do stanu początkowego: `git rebase --abort`.
 
+Aby poprawić rebase można użyć `git rebase --edit-todo` w trakcie jego wykonywania.
+
 ---
 
 - `git rebase -i <baza>` - przykład `git rebase -i HEAD~4` lub `git rebase origin/main` lub `git rebase -i <hash_commita>`
