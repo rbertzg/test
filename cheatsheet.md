@@ -88,6 +88,8 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
   - `--no-ff`: Zawsze twórz merge commit, nawet jeśli możliwe jest przewinięcie (fast-forward). Zachowuje kontekst istnienia gałęzi.
   - `--squash`: Scala wszystkie commity z gałęzi w jeden, gotowy do zatwierdzenia. Nie tworzy merge commita. Usunąć branch po squash merge!
   - `--abort`: Przerywa proces scalania, jeśli wystąpiły konflikty.
+    `git checkout --ours <nazwa_pliku>`: Pozwala szybko wybrać wersję pliku z Twojej bieżącej gałęzi (HEAD).
+    `git checkout --theirs <nazwa_pliku>`: Pozwala szybko wybrać wersję pliku z gałęzi, którą scalasz.
 
 ---
 
@@ -115,6 +117,7 @@ To jest szybka ściągawka z najważniejszych komend, flag i wzorców użycia Gi
   - `-3 -p`: Pokazuje historię zmian dla 3 ostatnich commitów.
   - `-S"tekst"`: Wyszukuje commity, które wprowadziły lub usunęły wystąpienia danego tekstu.
   - `--grep="tekst"`: Filtruje commity po tekście w ich opisie.
+  - `--merge`: Pokazuje listę commitów, które są w konflikcie między scalanymi gałęziami.
 - `git diff`
   - Pokazuje różnice między katalogiem roboczym a poczekalnią.
   - `--staged` lub `--cached`: Pokazuje różnice między poczekalnią a ostatnim commitem.
@@ -180,7 +183,10 @@ Aby poprawić rebase można użyć `git rebase --edit-todo` w trakcie jego wykon
   - Otwiera interaktywną sesję do edycji, łączenia, usuwania i zmiany kolejności commitów. Po zakończeniu `rebase` należy użyć `git push --force-with-lease`, aby zaktualizować historię na zdalnym repozytorium.
   - `<hash_commita>`: Uruchamia interaktywny rebase, w którym wyświetlone zostaną wszystkie commity znajdujące się po wskazanym commitcie w bieżącej gałęzi.
 - `git cherry-pick <hash>`
-  - Aplikuje jeden konkretny commit z innej gałęzi na bieżącą.
+  - Aplikuje jeden konkretny commit z innej gałęzi na bieżącą. Jest użyteczne, gdy chcesz dodać konkretną poprawkę bez łączenia całej historii z innej gałęzi.
+- `git cherry-pick <hash1> <hash2> <hash3>`: Przeniesienie wielu commitów jednocześnie. Kolejność wprowadzonych hashy to kolejność ich przenoszenia. Podawać commity od najstarszego do najnowszego.
+  - `-n` / `--no-commit`: Zastosuje zmiany, ale nie tworzy automatycznie commitu.
+  - `--edit`: Pozwala edytować wiadomość commitu przed zapisaniem.
 - `git stash`
   - Chowa bieżące, niezatwierdzone zmiany. Indeks 0 wskazuje najświeższe zmiany w schowku. **Pozwala przenosić niezatwierdzone zmiany pomiędzy gałęziami.**
   - `-u`: Pozwala zapisać w schowku nieśledzone pliki.
@@ -206,10 +212,14 @@ Aby poprawić rebase można użyć `git rebase --edit-todo` w trakcie jego wykon
 
 ### Zarządzanie Repozytorium
 
-- `git tag`
-  - `-a <nazwa>`: Tworzy tag adnotowany (zalecany).
+- `git show <tag>`: Wyświetla commit, na który wskazuje tag oraz dodatkowe informacje (jeśli są dostępne)
+- `git tag`: Pokazuje tagi.
+
+  - `-f <tag> <hash_commita>`: Jeśli tag o podanej nazwie istnieje nadpisuje go i przypisuje do podanego hasha.
+  - `-a <nazwa>`: Tworzy tag adnotowany (zalecany), czyli informacja o autorze.
   - `-m "opis"`: Dodaje opis do tagu.
   - `-d <nazwa>`: Usuwa tag.
+
 - `git gc`
   - Uruchamia "garbage collector" - czyści i optymalizuje repozytorium.
 - `git lfs`
@@ -372,4 +382,117 @@ BREAKING CHANGE: 'username' zmieniono na 'login' w /api/v1/users.
 
 ---
 
-### Semantic Versioning (SemVer)
+### Commit Verbs Guide – Web Development
+
+Zalecenia:
+
+- Tryb rozkazujący (imperative mood): _add_, _remove_, _fix_ (nie _added_, _removed_, _fixed_).
+- Bez kropki na końcu tytułu.
+- Krótko i konkretnie (max ~50 znaków).
+- Angielski jako standard.
+
+---
+
+## 1. Dodawanie / Tworzenie
+
+| Czasownik | Synonimy          | Kontekst użycia                                    | Przykład commita               |
+| --------- | ----------------- | -------------------------------------------------- | ------------------------------ |
+| add       | insert, append    | Dodanie nowej funkcji, elementu, stylu             | `add search bar to header`     |
+| create    | build, generate   | Utworzenie od podstaw (np. plik, komponent, moduł) | `create base layout`           |
+| implement | apply, integrate  | Wprowadzenie logiki/funkcjonalności                | `implement JWT authentication` |
+| introduce | roll out, launch  | Wprowadzenie nowej funkcji/procesu                 | `introduce API error handling` |
+| enable    | activate, turn on | Włączenie funkcji lub opcji                        | `enable dark mode`             |
+
+---
+
+## 2. Usuwanie
+
+| Czasownik | Synonimy          | Kontekst użycia                                     | Przykład commita                |
+| --------- | ----------------- | --------------------------------------------------- | ------------------------------- |
+| remove    | strip, clear      | Usunięcie fragmentów kodu, elementów UI, zależności | `remove unused CSS classes`     |
+| delete    | erase, destroy    | Fizyczne usunięcie pliku lub zasobu                 | `delete old logo.svg`           |
+| drop      | discontinue, stop | Porzucenie wsparcia lub funkcji                     | `drop IE11 support`             |
+| eliminate | get rid of        | Wyeliminowanie problemu, duplikacji                 | `eliminate duplicate API calls` |
+
+---
+
+## 3. Modyfikacja / Zmiana
+
+| Czasownik | Synonimy         | Kontekst użycia                         | Przykład commita                     |
+| --------- | ---------------- | --------------------------------------- | ------------------------------------ |
+| update    | refresh, bump    | Zaktualizowanie wersji, treści, zasobu  | `update dependencies`                |
+| change    | alter, switch    | Zmiana istniejącego elementu            | `change default font size`           |
+| modify    | tweak, adjust    | Modyfikacja fragmentu kodu, UI          | `modify footer layout for mobile`    |
+| replace   | swap, substitute | Zastąpienie jednego elementu innym      | `replace axios with fetch`           |
+| adjust    | tune, align      | Drobne dostosowanie                     | `adjust spacing between form fields` |
+| revise    | edit, rework     | Poprawienie lub przepisanie treści/kodu | `revise wording in error messages`   |
+
+---
+
+## 4. Ulepszanie / Optymalizacja
+
+| Czasownik | Synonimy            | Kontekst użycia                                    | Przykład commita                 |
+| --------- | ------------------- | -------------------------------------------------- | -------------------------------- |
+| improve   | better, upgrade     | Ulepszenie istniejącego rozwiązania                | `improve page load speed`        |
+| enhance   | boost, refine       | Dodanie nowych możliwości lub jakości              | `enhance dropdown accessibility` |
+| optimize  | tune, streamline    | Optymalizacja wydajności                           | `optimize image loading`         |
+| simplify  | streamline, reduce  | Uproszczenie logiki lub struktury                  | `simplify form validation`       |
+| refactor  | restructure, rework | Zmiana struktury kodu bez zmiany działania         | `refactor navbar component`      |
+| clean     | tidy, clear         | Usunięcie zbędnych elementów, poprawki czytelności | `clean unused imports`           |
+| polish    | refine, beautify    | Drobne poprawki estetyki UI                        | `polish button hover animations` |
+
+---
+
+## 5. Naprawa błędów
+
+| Czasownik | Synonimy       | Kontekst użycia                      | Przykład commita              |
+| --------- | -------------- | ------------------------------------ | ----------------------------- |
+| fix       | repair, mend   | Naprawa błędu                        | `fix 404 error on blog page`  |
+| resolve   | settle, handle | Rozwiązanie problemu                 | `resolve broken image links`  |
+| patch     | hotfix, plug   | Szybka poprawka problemu             | `patch memory leak in server` |
+| correct   | amend, rectify | Korekta literówki lub drobnego błędu | `correct typo in README`      |
+
+---
+
+## 6. Styl / Formatowanie
+
+| Czasownik | Synonimy               | Kontekst użycia                         | Przykład commita            |
+| --------- | ---------------------- | --------------------------------------- | --------------------------- |
+| style     | skin, theme            | Zmiana wyglądu UI lub formatowanie kodu | `style hero section`        |
+| format    | prettify, arrange      | Formatowanie kodu                       | `format code with Prettier` |
+| reformat  | rearrange, restructure | Ponowne formatowanie                    | `reformat SCSS variables`   |
+| align     | center, position       | Wyrównanie elementów w UI               | `align footer buttons`      |
+| restyle   | redesign, revamp       | Zmiana wyglądu elementu                 | `restyle modal window`      |
+
+---
+
+## 7. Dokumentacja / Komunikacja
+
+| Czasownik | Synonimy          | Kontekst użycia                       | Przykład commita             |
+| --------- | ----------------- | ------------------------------------- | ---------------------------- |
+| document  | describe, outline | Dodanie lub aktualizacja dokumentacji | `document API endpoints`     |
+| clarify   | explain, detail   | Doprecyzowanie instrukcji lub opisu   | `clarify usage instructions` |
+
+---
+
+## Najczesciej uzywane
+
+| Czasownik | Kontekst użycia                                | Przykład commita                  |
+| --------- | ---------------------------------------------- | --------------------------------- |
+| add       | Dodanie nowej funkcji, elementu, pliku         | `add search bar to header`        |
+| create    | Utworzenie czegoś od zera                      | `create base layout`              |
+| update    | Aktualizacja istniejącego elementu, danych     | `update dependencies`             |
+| change    | Zmiana wartości, ustawienia, treści            | `change default font size`        |
+| modify    | Drobna modyfikacja fragmentu kodu lub UI       | `modify footer layout for mobile` |
+| improve   | Poprawa jakości lub działania                  | `improve page load speed`         |
+| enhance   | Ulepszenie poprzez dodanie możliwości          | `enhance dropdown accessibility`  |
+| optimize  | Optymalizacja wydajności                       | `optimize image loading`          |
+| simplify  | Uproszczenie logiki lub struktury              | `simplify form validation`        |
+| refactor  | Przebudowa kodu bez zmiany działania           | `refactor navbar component`       |
+| remove    | Usunięcie fragmentu kodu, zależności, elementu | `remove unused CSS classes`       |
+| delete    | Fizyczne usunięcie pliku lub zasobu            | `delete old logo.svg`             |
+| fix       | Naprawa błędu                                  | `fix 404 error on blog page`      |
+| resolve   | Rozwiązanie problemu                           | `resolve broken image links`      |
+| style     | Zmiany w wyglądzie UI lub formatowanie kodu    | `style hero section for mobile`   |
+
+---
